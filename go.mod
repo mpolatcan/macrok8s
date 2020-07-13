@@ -1,3 +1,3 @@
-module github.com/mpolatcan/microk8s-cluster-cli
+module github.com/mpolatcan/macrok8s
 
 go 1.13

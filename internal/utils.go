@@ -1,3 +1,7 @@
+/*
+   Written by Mutlu Polatcan
+   14.07.2020
+*/
 package internal
 
 import (
@@ -21,21 +25,19 @@ func RunCmd(command string, successMsg string, failureMsg string, args ...string
 
 	if err != nil {
 		if stderr != "" {
-			log.Println(stderr)
+			log.Print(stderr)
 		}
 
 		if stdout != "" {
-			log.Println(stdout)
+			log.Print(stdout)
 		}
 
 		if failureMsg != "" {
 			log.Fatal(failureMsg)
 		}
 	} else {
-		log.Println(stdout)
-
 		if successMsg != "" {
-			log.Println(successMsg)
+			log.Print(successMsg)
 		}
 	}
 

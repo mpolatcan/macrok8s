@@ -1,19 +1,26 @@
-package macrok8s
+/*
+  __  __                      _  _____
+ |  \/  |                    | |/ / _ \
+ | \  / | __ _  ___ _ __ ___ | ' | (_) |___
+ | |\/| |/ _` |/ __| '__/ _ \|  < > _ </ __|
+ | |  | | (_| | (__| | | (_) | . | (_) \__ \
+ |_|  |_|\__,_|\___|_|  \___/|_|\_\___/|___/
+
+  Written by Mutlu Polatcan
+  14.07.2020
+*/
+package main
 
 import (
 	"flag"
 	"fmt"
-	"github.com/mpolatcan/macrok8s/internal"
 	"os"
+
+	"github.com/mpolatcan/macrok8s/internal"
 )
 
 func main() {
-	microK8sClusterManager := internal.NewMicroK8sClusterManager()
-
-	if len(os.Args) < 2 {
-		println("Exiting...")
-		os.Exit(1)
-	}
+	macroK8s := internal.NewMacroK8s()
 
 	// ==================================== CREATE COMMAND FLAGS =============================================
 	createCmd := flag.NewFlagSet("create", flag.ExitOnError)
@@ -50,7 +57,7 @@ func main() {
 		if err != nil {
 			createCmd.Usage()
 		} else {
-			microK8sClusterManager.CreateCluster(*createdClusterName, *masterCpus, *masterMem,
+			macroK8s.CreateCluster(*createdClusterName, *masterCpus, *masterMem,
 												 *masterDisk, *workerCount, *workerCpus,
 												 *workerMem, *workerDisk, *k8sVersion)
 		}
@@ -60,7 +67,7 @@ func main() {
 		if err != nil {
 			deleteCmd.Usage()
 		} else {
-			microK8sClusterManager.DeleteCluster(*deletedClusterName)
+			macroK8s.DeleteCluster(*deletedClusterName)
 		}
 	case "start": {
 		err := startCmd.Parse(os.Args[2:])
@@ -68,7 +75,7 @@ func main() {
 		if err != nil {
 			startCmd.Usage()
 		} else {
-			microK8sClusterManager.StartCluster(*startedClusterName)
+			macroK8s.StartCluster(*startedClusterName)
 		}
 	}
 	case "stop": {
@@ -77,11 +84,16 @@ func main() {
 		if err != nil {
 			stopCmd.Usage()
 		} else {
-			microK8sClusterManager.StopCluster(*stoppedClusterName)
+			macroK8s.StopCluster(*stoppedClusterName)
 		}
 	}
 	default:
-		fmt.Printf("Wrong command \"%s\"! Exiting...", os.Args[1])
+		fmt.Printf("Wrong command \"%s\"! Exitingsss...", os.Args[1])
+		os.Exit(1)
+	}
+
+	if len(os.Args) < 2 {
+		println("Exiting...")
 		os.Exit(1)
 	}
 }
