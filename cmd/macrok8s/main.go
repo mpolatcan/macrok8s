@@ -1,9 +1,9 @@
-package main
+package macrok8s
 
 import (
 	"flag"
 	"fmt"
-	"github.com/mpolatcan/microk8s-cluster-cli/internal"
+	"github.com/mpolatcan/macrok8s/internal"
 	"os"
 )
 
